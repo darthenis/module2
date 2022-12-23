@@ -1,0 +1,344 @@
+*{
+
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+}
+
+:root{
+
+    --primary: #d90368;
+    --secondary: #f53e94;
+    --third: #82023e;
+    --fourth: #ffb7d9;
+
+}
+
+body{   
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #815c6d;
+
+}
+
+.link-logo{
+
+
+    height: 40px;
+}
+
+nav{
+    height: 70px;
+}
+
+nav ul {
+
+    display: flex;
+    align-items: center;
+
+}
+
+.underline::before{
+    content: "";
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    background-color: var(--primary);
+    width: 100%;
+    height: 1px;
+
+}
+
+@media (max-width: 990px){
+
+    
+    nav{
+        max-height: none;
+        text-align: center;
+    }
+
+    nav li {
+
+        width: 100%;
+
+    }
+    nav > div {
+
+        gap: 20px   ;
+
+    }
+
+}
+
+nav a:hover {
+
+   background-color: var(--primary);
+   transition: .5s;
+
+}
+
+nav a:hover {
+
+    color: white !important;
+    transition: 1s;
+
+}
+
+nav a {
+
+    color : var(--primary) !important;
+    font-size: .8rem !important;
+    border-radius: 10px;
+    position: relative;
+
+}
+
+@media (max-width: 990px){
+
+
+    nav a {
+
+        font-size: 1rem;
+
+    }
+
+}
+
+
+/*-------------------------HEADER--------------------*/
+header{
+
+    height: 100px;
+    background-color: var(--third);
+    color: white;
+
+}
+
+header h1 {
+
+    font-size: 2rem;
+
+}
+
+
+.rotateLeft{
+
+    transform: rotate(180deg);
+
+}
+
+.containerArrows > div img{
+    height: 50px;
+
+}
+
+/*--------------------------MAIN----------------------*/
+
+.accent-color{
+    accent-color: var(--secondary);
+    background-color: #cab2bd;
+    
+}
+
+.labelCheck label{
+
+    color: #f0d0d0;
+
+}
+
+article{
+    max-width: 85vw;
+    min-height: 346px;
+    background-color: var(--fourth)!important;
+
+}
+
+article > img{
+
+    box-shadow: 3px 3px 1px rgb(0,0,0,0.5);
+    height: 150px;
+    width: 200px;
+    object-fit: cover;
+    object-position: center;
+
+}
+
+.btn-viewMore{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white !important;
+    text-decoration: none;
+    color: inherit;
+    background: var(--primary);
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 1px rgb(0,0,0,0.5);
+}
+
+.btn-viewMore:hover{
+
+    background: var(--secondary);
+
+}
+
+.btn-viewMore:active{
+
+    transform: scale(0.97);
+
+}
+
+.search-container{
+
+    height: 30px;
+
+}
+
+.search-container img{
+
+    width: 20px;
+
+}
+
+.search-container > input {
+
+    max-width: 600px;
+}
+
+@media (max-width: 560px){
+
+    .search-container > input {
+
+        max-width: 80vw;
+
+
+    }
+
+}
+
+form{
+
+    max-width: 500px;
+    color: white;
+}
+
+
+form > div {
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+form input[type="submit"]{
+
+    width: 100px;
+
+}
+
+.form-control:focus{
+    border-color: var(--secondary) !important;
+    box-shadow: 0 0 0 0.1rem var(--primary) !important;
+  }
+
+
+
+  .custom-toggler .navbar-toggler-icon {
+
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(217, 3, 104, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  }
+  
+
+textarea{
+
+    height: 100px;
+    resize: none;
+}   
+
+tr > th{
+
+    background-color: #7e003b!important;
+    color: white;
+    font-size: 1.5rem;
+
+
+}
+
+tr, th, td {
+
+    border: 1px solid rgb(0,0,0,0.5) !important;
+
+}
+
+td{
+
+    background-color: #fa8bbf!important;
+    color: black;
+    font-weight: 450;
+    height: 35px;
+
+
+}
+
+.detailCard{
+
+    width: 600px;
+
+}
+
+.detailCard span {
+
+    font-weight: bold;
+
+}
+
+.detailCard ul {
+
+    list-style: none;
+    list-style-position: inside;
+    padding: 0;
+
+}
+
+.detailCard > img {
+
+    height: 300px;
+    width: 300px;
+    max-width: 80vw;
+    box-shadow: 3px 3px 1px rgb(0,0,0,0.5);
+}
+
+/*-------------------------FOOTER---------------------*/
+
+footer{
+
+    height: 70px;
+    background-color: var(--third);
+    color: white;
+
+}
+
+
+footer img {
+
+    width: 40px;
+
+}
+
+footer h6 {
+
+    margin: 0;
+
+}
+
+.container-icon{
+    width: fit-content;
+    height: fit-content;
+    background-color: rgb(206, 206, 206);
+
+}

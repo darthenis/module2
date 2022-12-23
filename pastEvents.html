@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/images/logo.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/styles/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous" defer></script>
+    <title>Past Events</title>
+</head>
+<body>
+      <!-----------------  NAV   --------------------->
+
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="./index.html">
+            <img src="./assets/images/logo.png" class="link-logo" alt="logo">
+          </a>
+          <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0 d-flex gap-2 d-flex  align-items-center justify-content-end w-100">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./upcomingEvents.html">Upcoming Events</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link underline" href="./pastEvents.html">Past Events</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./contact.html">Contact</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./stats.html">Stats</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+        <!-----------------  HEADER   --------------------->
+
+      <header class="d-flex justify-content-center align-items-center">
+            <h1>Past Events</h1>
+      </header>
+
+      <!-----------------  MAIN   --------------------->
+
+      <main>
+        <section class="d-flex gap-3 flex-column align-items-center justify-content-center p-4">
+            <div class="d-flex flex-wrap gap-4 w-100 justify-content-between p-2 text-light container">
+                <div class="d-flex flex-wrap gap-4 labelCheck">
+                    <div>
+                        <input type="checkbox" class="accent-color" id="categ1">
+                        <label for="categ1">Book Exchange</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" class="accent-color" id="categ2">
+                        <label for="categ2">Cinema</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" class="accent-color" id="categ3">
+                        <label for="categ3">Costume Party</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" class="accent-color" id="categ4">
+                        <label for="categ4">Food Fair</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" class="accent-color" id="categ5">
+                        <label for="categ5">Museum</label>
+                    </div>
+                    <div>
+                      <input type="checkbox" class="accent-color" id="categ6">
+                      <label for="categ6">Music Concert</label>
+                    </div>
+                    <div>
+                      <input type="checkbox" class="accent-color" id="categ7">
+                      <label for="categ7">Race</label>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center search-container gap-1">
+                    <input type="text" name="search" id="search" class="rounded h-100 form-control">
+                    <button class="btn-viewMore">
+                        <img src="./assets/images/search.svg" alt="searchIcon">
+                    </button>
+                </div>
+            </div>
+            <div class="w-100 d-flex flex-wrap justify-content-evenly gap-2">
+              <div class="container d-flex flex-column gap-3">
+                <div class="row gap-5 w-100 justify-content-around">
+                  <article class="card p-2 col-3" style="width: 15rem;">
+                    <img src="./assets/images/Concierto de musica1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body p-2 d-flex flex-column justify-content-between">
+                      <div>
+                        <h5 class="card-title text-center">Collectivities Party</h5>
+                        <p class="card-text">Enjoy your favourite dishes, from different countries, in a unique event for the whole family.</p>
+                      </div>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span class="fw-bold">Price $5</span>
+                        <a href="#" class="btn-viewMore">View more</a>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="card p-2 col-3" style="width: 15rem;">
+                    <img src="https://i.postimg.cc/GmHRkbNV/Jurassic-Park.jpg" class="card-img-top" alt="Jurassic-Park">
+                    <div class="card-body p-2 d-flex flex-column justify-content-between">
+                      <div>
+                        <h5 class="card-title text-center">Jurassic Park</h5>
+                        <p class="card-text">Let's go meet the biggest dinosaurs in the paleontology museum.</p>
+                      </div>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span class="fw-bold">Price $15</span>
+                        <a href="#" class="btn-viewMore">View more</a>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="card p-2 col-3" style="width: 15rem;">
+                    <img src="https://i.postimg.cc/KYD0jMf2/comicon.jpg" class="card-img-top" alt="comicon">
+                    <div class="card-body p-2 d-flex flex-column justify-content-between">
+                      <div>
+                        <h5 class="card-title text-center">Comicon</h5>
+                        <p class="card-text">For comic lovers, all your favourite characters gathered in one place.</p>
+                      </div>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span class="fw-bold">Price $54</span>
+                        <a href="#" class="btn-viewMore">View more</a>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="card p-2 col-3" style="width: 15rem;">
+                    <img src="https://i.postimg.cc/KvsSK8cj/Electronic-Fest.jpg" class="card-img-top" alt="Electronic-Fest">
+                    <div class="card-body p-2 d-flex flex-column justify-content-between">
+                      <div>
+                        <h5 class="card-title text-center">Electronic Fest</h5>
+                        <p class="card-text">The best national and international DJs gathered in one place.</p>
+                      </div>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span class="fw-bold">Price $250</span>
+                        <a href="#" class="btn-viewMore">View more</a>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="card p-2 col-3" style="width: 15rem;">
+                    <img src="https://i.postimg.cc/fyLqZY9K/10-K-for-life.jpg" class="card-img-top" alt="10-K-for-life">
+                    <div class="card-body p-2 d-flex flex-column justify-content-between">
+                      <div>
+                        <h5 class="card-title text-center">10K for life</h5>
+                        <p class="card-text">Come and exercise, improve your health and lifestyle.</p>
+                      </div>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span class="fw-bold">Price $3</span>
+                        <a href="#" class="btn-viewMore">View more</a>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="card p-2 col-3" style="width: 15rem;">
+                    <img src="https://i.postimg.cc/05FhxHVK/book4.jpg" class="card-img-top" alt="book4">
+                    <div class="card-body p-2 d-flex flex-column justify-content-between">
+                      <div>
+                        <h5 class="card-title text-center">Just for your kitchen</h5>
+                        <p class="card-text">If you're a gastronomy lover come get the cookbook that best suits your taste and your family's.</p>
+                      </div>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span class="fw-bold">Price $100</span>
+                        <a href="#" class="btn-viewMore">View more</a>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="card p-2 col-3" style="width: 15rem;">
+                    <img src="https://i.postimg.cc/vH52y81C/cinema4.jpg" class="card-img-top" alt="cinema4">
+                    <div class="card-body p-2 d-flex flex-column justify-content-between">
+                      <div>
+                        <h5 class="card-title text-center">Batman</h5>
+                        <p class="card-text">Come see Batman fight crime in Gotham City.</p>
+                      </div>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span class="fw-bold">Price $225</span>
+                        <a href="#" class="btn-viewMore">View more</a>
+                      </div>
+                    </div>
+                  </article>
+              </div>
+            </div>
+        </section>
+      </main>
+
+    <!-----------------  FOOTER   --------------------->
+
+      <footer class="d-flex justify-content-between align-items-center px-4 px-lg-5 ">
+        <div class="d-flex gap-3">
+            <div class="rounded-circle container-icon">
+                <img src="./assets/images/instagram.svg" alt="iconInstagram">
+            </div>
+            <div class="rounded-circle container-icon">
+                <img src="./assets/images/facebook.svg" alt="iconFacebook">
+            </div>
+            <div class="rounded-circle container-icon">
+                <img src="./assets/images/whatsapp.svg" alt="iconWhatsapp">
+            </div>
+        </div>
+        <h6>Cohorte 41</h6>
+      </footer>
+</body>
+</html>
