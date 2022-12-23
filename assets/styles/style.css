@@ -31,7 +31,7 @@ body{
 }
 
 nav{
-    height: 70px;
+    min-height: 70px;
 }
 
 nav ul {
@@ -56,6 +56,18 @@ nav ul {
 
 @media (max-width: 990px){
 
+    .underline::before{
+        content: "";
+        position: absolute;
+        top: 90%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: inline-block;
+        background-color: var(--primary);
+        width: 100px;
+        height: 1px;
+    
+    }
     
     nav{
         max-height: none;
@@ -113,7 +125,7 @@ nav a {
 /*-------------------------HEADER--------------------*/
 header{
 
-    height: 100px;
+    min-height: 100px;
     background-color: var(--third);
     color: white;
 
@@ -158,15 +170,7 @@ article{
 
 }
 
-article > img{
 
-    box-shadow: 3px 3px 1px rgb(0,0,0,0.5);
-    height: 150px;
-    width: 200px;
-    object-fit: cover;
-    object-position: center;
-
-}
 
 .btn-viewMore{
     display: flex;
@@ -286,9 +290,38 @@ td{
 }
 
 .detailCard{
-
-    width: 600px;
+    max-width: 90vw;
+    width: 800px;
     box-shadow: 3px 3px 3px rgb(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+
+}
+
+.detailCard > img {
+
+    height: 300px;
+    width: 400px;
+    max-width: 80vw;
+    object-position: center;
+    object-fit: contain;
+}
+
+@media (max-width: 700px) {
+    
+    .detailCard{
+
+        flex-direction: column;
+
+
+    }
+
+    .detailCard > img {
+
+        width: 100%;
+        height: auto;
+
+    }
 
 }
 
@@ -304,14 +337,6 @@ td{
     list-style-position: inside;
     padding: 0;
 
-}
-
-.detailCard > img {
-
-    height: 350px;
-    width: 300px;
-    max-width: 80vw;
-    box-shadow: 3px 3px 1px rgb(0,0,0,0.5);
 }
 
 /*-------------------------FOOTER---------------------*/
