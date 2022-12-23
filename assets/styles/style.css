@@ -170,7 +170,11 @@ article{
 
 }
 
+.grid-cards > article > img{
 
+    height: 150px;
+
+}
 
 .btn-viewMore{
     display: flex;
