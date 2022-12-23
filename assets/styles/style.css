@@ -288,6 +288,7 @@ td{
 .detailCard{
 
     width: 600px;
+    box-shadow: 3px 3px 3px rgb(0,0,0,0.5);
 
 }
 
@@ -307,7 +308,7 @@ td{
 
 .detailCard > img {
 
-    height: 300px;
+    height: 350px;
     width: 300px;
     max-width: 80vw;
     box-shadow: 3px 3px 1px rgb(0,0,0,0.5);
