@@ -87,14 +87,14 @@ nav ul {
 
 }
 
-nav a:hover {
+nav li > a:hover {
 
    background-color: var(--primary);
    transition: .5s;
 
 }
 
-nav a:hover {
+nav li > a:hover {
 
     color: white !important;
     transition: 1s;
