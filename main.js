@@ -10,9 +10,8 @@ const loadData = async () => {
     .then((res) => {
       data = res;
       filterEvents = res.events;
+      renderiseCards(res.events);
     });
-
-  renderiseCards(filterEvents);
 };
 
 const renderiseCards = (filterEvents) => {
