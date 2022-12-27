@@ -2,17 +2,15 @@ let data;
 
 let filterEvents = [];
 
-const loadData = async () => {
-  await fetch("./assets/data/data.json", {
-    method: "GET",
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      data = res;
-      filterEvents = res.events;
-      renderiseCards(res.events, res.currentDate);
-    });
-};
+fetch("./assets/data/data.json", {
+  method: "GET",
+})
+  .then((res) => res.json())
+  .then((res) => {
+    data = res;
+    filterEvents = res.events;
+    renderiseCards(res.events, res.currentDate);
+  });
 
 const renderiseCards = (filterEvents, actualDate) => {
   const containerCards = document.getElementById("containerCards");
