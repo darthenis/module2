@@ -151,6 +151,12 @@ header h1 {
 
 /*--------------------------MAIN----------------------*/
 
+main{
+
+    min-height: 80vh;
+
+}
+
 .accent-color{
     accent-color: var(--secondary);
     background-color: #cab2bd;
