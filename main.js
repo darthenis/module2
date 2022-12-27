@@ -1,10 +1,6 @@
-let data = [];
+let data;
 
-let filterData = [];
-
-let actualDate;
-
-const containerCards = document.getElementById("containerCards");
+let filterEvents = [];
 
 const loadData = async () => {
   await fetch("./assets/data/data.json", {
@@ -12,28 +8,29 @@ const loadData = async () => {
   })
     .then((res) => res.json())
     .then((res) => {
-      data = res.events;
-      filterData = res.events;
-      actualDate = new Date(res.currentDate);
+      data = res;
+      filterEvents = res.events;
     });
 
-  renderiseCards();
+  renderiseCards(filterEvents);
 };
 
-const renderiseCards = () => {
+const renderiseCards = (filterEvents) => {
+  const containerCards = document.getElementById("containerCards");
+
   let innerHTMLCards = "";
 
   containerCards.innerHTML = "";
 
   let title = document.title.replace("Amazing Events | ", "");
 
-  for (let card of filterData) {
-    if (title === "Upcoming Events" && new Date(card.date) < actualDate) {
-      innerHTMLCards += buildCard(card);
-    } else if (title === "Past Events" && new Date(card.date) > actualDate) {
-      innerHTMLCards += buildCard(card);
+  for (let event of filterEvents) {
+    if (title === "Upcoming Events" && new Date(event.date) < actualDate) {
+      innerHTMLCards += buildCard(event);
+    } else if (title === "Past Events" && new Date(event.date) > actualDate) {
+      innerHTMLCards += buildCard(event);
     } else if (title === "Home") {
-      innerHTMLCards += buildCard(card);
+      innerHTMLCards += buildCard(event);
     }
   }
 
