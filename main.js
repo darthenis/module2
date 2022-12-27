@@ -14,14 +14,14 @@ const loadData = async () => {
     .then((res) => {
       data = res.events;
       filterData = res.events;
-      actualDate = res.currentDate;
+      actualDate = new Date(res.currentDate);
     });
 
   renderiseCards();
 };
 
 const renderiseCards = () => {
-  let innerHTMLHome = "";
+  let innerHTMLCards = "";
 
   containerCards.innerHTML = "";
 
@@ -29,15 +29,15 @@ const renderiseCards = () => {
 
   for (let card of filterData) {
     if (title === "Upcoming Events" && new Date(card.date) < actualDate) {
-      innerHTMLHome += buildCard(card);
+      innerHTMLCards += buildCard(card);
     } else if (title === "Past Events" && new Date(card.date) > actualDate) {
-      innerHTMLHome += buildCard(card);
+      innerHTMLCards += buildCard(card);
     } else if (title === "Home") {
-      innerHTMLHome += buildCard(card);
+      innerHTMLCards += buildCard(card);
     }
   }
 
-  containerCards.innerHTML = innerHTMLHome;
+  containerCards.innerHTML = innerHTMLCards;
 };
 
 const buildCard = (card) => {
