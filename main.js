@@ -2,9 +2,9 @@ let data = [];
 
 let filterData = [];
 
-let actualDate = new Date("2022-1-1");
+let actualDate;
 
-const sectionHome = document.getElementById("containerCards");
+const containerCards = document.getElementById("containerCards");
 
 const loadData = async () => {
   await fetch("./assets/data/data.json", {
@@ -12,19 +12,18 @@ const loadData = async () => {
   })
     .then((res) => res.json())
     .then((res) => {
-      data = [...res.events];
-      filterData = [...res.events];
+      data = res.events;
+      filterData = res.events;
+      actualDate = res.currentDate;
     });
 
-  renderiseData();
+  renderiseCards();
 };
 
-loadData();
-
-const renderiseData = () => {
+const renderiseCards = () => {
   let innerHTMLHome = "";
 
-  sectionHome.innerHTML = "";
+  containerCards.innerHTML = "";
 
   let title = document.title.replace("Amazing Events | ", "");
 
@@ -38,7 +37,7 @@ const renderiseData = () => {
     }
   }
 
-  sectionHome.innerHTML = innerHTMLHome;
+  containerCards.innerHTML = innerHTMLHome;
 };
 
 const buildCard = (card) => {
@@ -56,3 +55,5 @@ const buildCard = (card) => {
     </div>
 </article>`;
 };
+
+loadData();
