@@ -2,28 +2,22 @@ let events;
 
 let filterEvents = [];
 
-const loadData = (events, filterEvents, url) => {
+fetch("./assets/data/data.json", {
+  method: "GET",
+})
+  .then((res) => res.json())
+  .then((res) => {
+    getUpcomingEvents(res.events, res.currentDate, events, filterEvents);
+  });
 
-  fetch(url, {
-    method: "GET",
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      events = res.events;
-      filterEvents = res.events;
-      renderiseCards(res.events)
-    });
-
-}
-
-const renderiseCards = (events) => {
+const renderiseCards = (filterEvents) => {
   const containerCards = document.getElementById("containerCards");
 
   let innerHTMLCards = "";
 
   containerCards.innerHTML = "";
 
-  for (let event of events) {
+  for (let event of filterEvents) {
     innerHTMLCards += buildCard(event);
   }
 
@@ -46,4 +40,16 @@ const buildCard = (card) => {
 </article>`;
 };
 
-loadData(events, filterEvents, "./assets/data/data.json");
+const getUpcomingEvents = (fetchEvents, currentDate, events, filterEvents) => {
+  let eventsFilter = [];
+
+  for (let event of fetchEvents) {
+    if (event.date < currentDate) {
+      eventsFilter.push(event);
+    }
+  }
+
+  events = [eventsFilter];
+  filterEvents = eventsFilter;
+  renderiseCards(eventsFilter);
+};
