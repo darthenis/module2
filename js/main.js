@@ -1,18 +1,18 @@
-const loadData = (url) => {
+const containerCards = document.getElementById("containerCards");
+
+const loadData = (url, where) => {
   fetch(url, {
     method: "GET",
   })
     .then((res) => res.json())
     .then((res) => {
-      renderiseEventsCard(res.events);
+      renderiseEventsCard(res.events, where);
     });
 };
 
-const renderiseEventsCard = (events) => {
-  const containerCards = document.getElementById("containerCards");
-
+const renderiseEventsCard = (events, where) => {
   for (let event of events) {
-    containerCards.innerHTML += buildCard(event);
+    where.innerHTML += buildCard(event);
   }
 };
 
@@ -32,4 +32,4 @@ const buildCard = (card) => {
 </article>`;
 };
 
-loadData("./assets/data/data.json");
+loadData("./assets/data/data.json", containerCards);

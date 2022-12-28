@@ -1,14 +1,16 @@
-const loadData = (url) => {
+const containerCards = document.getElementById("containerCards");
+
+const loadData = (url, where) => {
   fetch(url, {
     method: "GET",
   })
     .then((res) => res.json())
     .then((res) => {
-      getPastEvents(res.events, res.currentDate);
+      getPastEvents(res.events, res.currentDate, where);
     });
 };
 
-const getPastEvents = (events, currentDate) => {
+const getPastEvents = (events, currentDate, where) => {
   let pastEvents = [];
 
   for (let event of events) {
@@ -17,14 +19,12 @@ const getPastEvents = (events, currentDate) => {
     }
   }
 
-  renderiseEventsCard(pastEvents);
+  renderiseEventsCard(pastEvents, where);
 };
 
-const renderiseEventsCard = (events) => {
-  const containerCards = document.getElementById("containerCards");
-
+const renderiseEventsCard = (events, where) => {
   for (let event of events) {
-    containerCards.innerHTML += buildCard(event);
+    where.innerHTML += buildCard(event);
   }
 };
 
@@ -44,4 +44,4 @@ const buildCard = (card) => {
 </article>`;
 };
 
-loadData("./assets/data/data.json");
+loadData("./assets/data/data.json", containerCards);
