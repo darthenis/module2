@@ -3,7 +3,6 @@ let events;
 let filterEvents = [];
 
 const loadData = (events, filterEvents, url) => {
-
   fetch(url, {
     method: "GET",
   })
@@ -11,23 +10,18 @@ const loadData = (events, filterEvents, url) => {
     .then((res) => {
       events = res.events;
       filterEvents = res.events;
-      renderiseCards(res.events)
+      renderiseCards(res.events);
     });
-
-}
+};
 
 const renderiseCards = (events) => {
   const containerCards = document.getElementById("containerCards");
 
-  let innerHTMLCards = "";
-
   containerCards.innerHTML = "";
 
   for (let event of events) {
-    innerHTMLCards += buildCard(event);
+    containerCards.innerHTML += buildCard(event);
   }
-
-  containerCards.innerHTML = innerHTMLCards;
 };
 
 const buildCard = (card) => {

@@ -10,18 +10,14 @@ fetch("./assets/data/data.json", {
     getUpcomingEvents(res.events, res.currentDate, events, filterEvents);
   });
 
-const renderiseCards = (filterEvents) => {
+const renderiseCards = (events) => {
   const containerCards = document.getElementById("containerCards");
-
-  let innerHTMLCards = "";
 
   containerCards.innerHTML = "";
 
-  for (let event of filterEvents) {
-    innerHTMLCards += buildCard(event);
+  for (let event of events) {
+    containerCards.innerHTML += buildCard(event);
   }
-
-  containerCards.innerHTML = innerHTMLCards;
 };
 
 const buildCard = (card) => {
