@@ -1,15 +1,9 @@
-let events = [];
-
-let filterEvents = [];
-
-const loadData = (events, filterEvents, url) => {
+const loadData = (url) => {
   fetch(url, {
     method: "GET",
   })
     .then((res) => res.json())
     .then((res) => {
-      events = res.events;
-      filterEvents = res.events;
       renderiseEventsCard(res.events);
     });
 };
@@ -38,4 +32,4 @@ const buildCard = (card) => {
 </article>`;
 };
 
-loadData(events, filterEvents, "./assets/data/data.json");
+loadData("./assets/data/data.json");

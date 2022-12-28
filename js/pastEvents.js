@@ -1,14 +1,24 @@
-let events = [];
+const loadData = (url) => {
+  fetch(url, {
+    method: "GET",
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      getPastEvents(res.events, res.currentDate);
+    });
+};
 
-let filterEvents = [];
+const getPastEvents = (events, currentDate) => {
+  let pastEvents = [];
 
-fetch("./assets/data/data.json", {
-  method: "GET",
-})
-  .then((res) => res.json())
-  .then((res) => {
-    getUpcomingEvents(res.events, res.currentDate, events, filterEvents);
-  });
+  for (let event of events) {
+    if (event.date > currentDate) {
+      pastEvents.push(event);
+    }
+  }
+
+  renderiseEventsCard(pastEvents);
+};
 
 const renderiseEventsCard = (events) => {
   const containerCards = document.getElementById("containerCards");
@@ -34,14 +44,4 @@ const buildCard = (card) => {
 </article>`;
 };
 
-const getUpcomingEvents = (fetchEvents, currentDate, events, filterEvents) => {
-
-  for (let event of fetchEvents) {
-    if (event.date > currentDate) {
-      events.push(event);
-    }
-  }
-
-  filterEvents = [...events];
-  renderiseEventsCard(filterEvents);
-};
+loadData("./assets/data/data.json");
