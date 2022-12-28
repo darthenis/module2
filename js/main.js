@@ -1,4 +1,4 @@
-let events;
+let events = [];
 
 let filterEvents = [];
 
@@ -10,14 +10,12 @@ const loadData = (events, filterEvents, url) => {
     .then((res) => {
       events = res.events;
       filterEvents = res.events;
-      renderiseCards(res.events);
+      renderiseEventsCard(res.events);
     });
 };
 
-const renderiseCards = (events) => {
+const renderiseEventsCard = (events) => {
   const containerCards = document.getElementById("containerCards");
-
-  containerCards.innerHTML = "";
 
   for (let event of events) {
     containerCards.innerHTML += buildCard(event);
