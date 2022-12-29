@@ -170,6 +170,22 @@ article{
 
 }
 
+.grid-cards{
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: 1rem;
+    width: 100%;
+    max-width: 1200px;
+
+}
+
+.grid-cards > article{
+
+    justify-self: center;
+
+}
+
 .grid-cards > article > img{
 
     height: 150px;

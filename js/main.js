@@ -17,7 +17,7 @@ const renderiseEventsCard = (events, where) => {
 };
 
 const buildCard = (card) => {
-  return `<article class="card p-2 col-3" style="width: 15rem;">
+  return `<article class="card p-2" style="width: 15rem;">
     <img src=${card.image} class="card-img-top" alt="Collectivities-Party">
     <div class="card-body p-2 d-flex flex-column justify-content-between">
         <div>
