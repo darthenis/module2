@@ -14,7 +14,7 @@ const getPastEvents = (events, currentDate, where) => {
   let pastEvents = [];
 
   for (let event of events) {
-    if (event.date > currentDate) {
+    if (event.date < currentDate) {
       pastEvents.push(event);
     }
   }
