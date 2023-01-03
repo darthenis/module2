@@ -2,8 +2,9 @@ const $containerCards = document.getElementById("containerCards");
 
 const $containerCheckBoxes = document.getElementById("containerCheckBoxes");
 
+const $checkBoxes = document.getElementsByClassName("filter");
 
-let eventsData;
+const $searchInput = document.getElementById("search");
 
 const loadData = async (url) => {
   return fetch(url, {
@@ -11,17 +12,16 @@ const loadData = async (url) => {
               })
                 .then((res) => res.json())
                 .then((res) => {
-                  eventsData = res.events;
                   return res.events;
                 });
 };
 
-const renderiseEventsCard = (events) => {
+const renderiseEventsCard = (events, container) => {
 
-  $containerCards.innerHTML  = "";
+  container.innerHTML  = "";
 
   for (let event of events) {
-    $containerCards.innerHTML += buildCard(event);
+    container.innerHTML += buildCard(event);
   }
 };
 
@@ -41,25 +41,27 @@ const buildCard = (card) => {
 </article>`;
 };
 
+//LoadData
+
 loadData("./assets/data/data.json").then((data) => {
 
-  renderiseEventsCard(data);
+  renderiseEventsCard(data, $containerCards);
 
-  generateCheckBoxes(data)
+  generateCheckBoxes(data, $containerCheckBoxes);
   
-  filterEvents()
+  filterEvents(data, $checkBoxes, $searchInput);
 
 })
 
 /*generate checkBoxes input from data's categories */
 
-const generateCheckBoxes = (events) => {
+const generateCheckBoxes = (events, container) => {
 
   const categories = events.map( event => event.category )
 
   const noRepeat = new Set( categories );
   
-  $containerCheckBoxes.innerHTML += buildTemplateCheckBoxes( noRepeat )
+  container.innerHTML += buildTemplateCheckBoxes( noRepeat )
 
 }
 
@@ -83,44 +85,36 @@ const buildTemplateCheckBoxes = (categories) => {
 
 /* apply filters events */ 
 
-const $checkBoxes = document.getElementsByClassName("filter");
+const filterEvents = (events, checkBoxes, searchInput) => {
 
-const $searchInput = document.getElementById("search");
+  for(let box of checkBoxes){
 
-const filterEvents = () => {
-
-  for(let box of $checkBoxes){
-
-    box.addEventListener('change', filterHandler)
+    box.addEventListener('change', () => filterHandler(events))
 
   }
 
-  $searchInput.addEventListener('input', filterHandler)
+  searchInput.addEventListener('input', () => filterHandler(events))
 
 }
 
-const filterHandler = (e) => {
+const filterHandler = (events) => {
 
-  let filterEventsSearch = searchHandler($searchInput)
+  let filterEventsSearch = searchHandler($searchInput, events);
 
-  let filterEvents = checkBoxHandler(filterEventsSearch, $checkBoxes)
+  let filterEvents = checkBoxHandler(filterEventsSearch, $checkBoxes);
 
-  renderiseEventsCard(filterEvents)
+  renderiseEventsCard(filterEvents, $containerCards)
 }
 
 
-const searchHandler = (input) => {
+const searchHandler = (input, events) => {
 
-  let filterData = eventsData.filter(data => data.name.toLowerCase().startsWith( input.value.toLowerCase() )).flat()
-
-  if(!filterData.length) filterData = eventsData;
-
-  return filterData;
+  return events.filter(data => data.name.toLowerCase().startsWith( input.value.toLowerCase() ));
 
 }
 
 
-const checkBoxHandler = (data, inputs) => {
+const checkBoxHandler = (events, inputs) => {
 
     let filterData = [];
 
@@ -132,7 +126,7 @@ const checkBoxHandler = (data, inputs) => {
 
         isActiveFilter++
 
-        filterData = filterData.concat(data.filter(e => e.category === input.nextElementSibling.innerHTML));
+        filterData = filterData.concat(events.filter(e => e.category === input.nextElementSibling.innerHTML));
 
       } else {
 
@@ -144,7 +138,7 @@ const checkBoxHandler = (data, inputs) => {
 
     }
 
-    if(!filterData.length && !isActiveFilter) filterData = data;
+    if(!filterData.length && !isActiveFilter) filterData = events;
 
     return filterData;
 
