@@ -41,7 +41,7 @@ const buildCard = (card) => {
 </article>`;
 };
 
-loadData("./assets/data/data.json", $containerCards).then((data) => {
+loadData("./assets/data/data.json").then((data) => {
 
   renderiseEventsCard(data);
 
