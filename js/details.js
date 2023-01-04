@@ -1,4 +1,4 @@
-const $containerCard = document.getElementById("articleDetail");
+const $containerCard = document.getElementById("containerDetail");
 
 const loadData = async (url) => {
     return fetch(url, {
@@ -40,7 +40,7 @@ const buildCard = (event) => {
                 <div>
                 <h1 class="text-center">${event.name}</h1>
                 <ul>
-                    <li><span>Date:</span>${event.date}</li>
+                    <li><span>Date:</span> ${event.date}</li>
                     <li><span>Description:</span> ${event.description}</li>
                     <li><span>Category:</span> ${event.category}</li>
                     <li><span>Place:</span> ${event.place}</li>
