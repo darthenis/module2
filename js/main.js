@@ -35,7 +35,7 @@ const buildCard = (card) => {
         </div>
         <div class="d-flex justify-content-between align-items-center">
             <span class="fw-bold">Price $${card.price}</span>
-            <a href="./details.html" class="btn-viewMore">View more</a>
+            <a href="./details.html?id=${card._id}" class="btn-viewMore">View more</a>
         </div>
     </div>
 </article>`;
