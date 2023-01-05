@@ -131,18 +131,6 @@ header h1 {
 
 }
 
-
-.rotateLeft{
-
-    transform: rotate(180deg);
-
-}
-
-.containerArrows > div img{
-    height: 50px;
-
-}
-
 /*--------------------------MAIN----------------------*/
 
 main{
