@@ -139,6 +139,12 @@ main{
 
 }
 
+#mainDetails {
+
+   min-height: auto;
+
+}
+
 .accent-color{
     accent-color: var(--secondary);
     background-color: #cab2bd;
