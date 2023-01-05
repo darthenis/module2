@@ -235,19 +235,11 @@ article{
 
 form{
     font-weight: 500;
-    max-width: 500px;
     color: black;
     background-color: #c28aa5;
     box-shadow: 1px 1px 1px rgb(0,0,0,0.5);
 }
 
-
-form > div {
-
-    display: flex;
-    flex-direction: column;
-
-}
 
 form input[type="submit"]{
 
@@ -275,7 +267,7 @@ input::selection {
 
 textarea{
 
-    height: 100px;
+    height: 200px;
     resize: none;
 }   
 
