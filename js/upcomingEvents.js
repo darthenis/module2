@@ -2,7 +2,7 @@ const $containerCards = document.getElementById("containerCards");
 
 const $containerCheckBoxes = document.getElementById("containerCheckBoxes");
 
-const $checkBoxes = document.getElementsByClassName("filter");
+let $checkBoxes;
 
 const $searchInput = document.getElementById("search");
 
@@ -60,6 +60,8 @@ loadData("./assets/data/data.json").then((data) => {
 
   generateCheckBoxes(data, $containerCheckBoxes)
 
+  $checkBoxes = document.querySelectorAll("input[type=checkbox]");
+
   filterEvents(data, $checkBoxes, $searchInput)
 
 });
@@ -73,7 +75,7 @@ const generateCheckBoxes = (events, container) => {
 
   const noRepeat = new Set( categories );
   
-  container.innerHTML += buildTemplateCheckBoxes( noRepeat )
+  container.innerHTML += buildTemplateCheckBoxes( noRepeat );
 
 }
 
@@ -84,7 +86,7 @@ const buildTemplateCheckBoxes = (categories) => {
 
   categories.forEach( (category) => {
       template += ` <div>
-                      <input type="checkbox" class="accent-color filter" id=${category} />
+                      <input type="checkbox" class="accent-color" value=${category.split(" ").join("")} id=${category} />
                       <label for=${category}>${category}</label>
                     </div>`
   });
@@ -130,7 +132,7 @@ const checkBoxHandler = (events, inputs) => {
 
     let filterData = [];
 
-    let isActiveFilter = inputs.length; // 0 is not active
+    let isActiveFilter = inputs.length;
 
     for(let input of inputs){
 
@@ -138,13 +140,13 @@ const checkBoxHandler = (events, inputs) => {
 
         isActiveFilter++
 
-        filterData = filterData.concat(events.filter(e => e.category === input.nextElementSibling.innerHTML));
+        filterData = filterData.concat(events.filter(e => e.category.split(" ").join("") === input.value));
 
       } else {
 
         isActiveFilter--
 
-        filterData = filterData.filter(e => e.category !== input.nextElementSibling.innerHTML);
+        filterData = filterData.filter(e => e.category.split(" ").join("") !== input.value);
 
       }
 

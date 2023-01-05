@@ -2,7 +2,7 @@ const $containerCards = document.getElementById("containerCards");
 
 const $containerCheckBoxes = document.getElementById("containerCheckBoxes");
 
-const $checkBoxes = document.getElementsByClassName("filter");
+let $checkBoxes;
 
 const $searchInput = document.getElementById("search");
 
@@ -26,6 +26,7 @@ const renderiseEventsCard = (events, container) => {
 };
 
 const buildCard = (card) => {
+
   return `<article class="card p-2" style="width: 15rem;">
     <img src=${card.image} class="card-img-top" alt="Collectivities-Party">
     <div class="card-body p-2 d-flex flex-column justify-content-between">
@@ -48,6 +49,8 @@ loadData("./assets/data/data.json").then((data) => {
   renderiseEventsCard(data, $containerCards);
 
   generateCheckBoxes(data, $containerCheckBoxes);
+
+  $checkBoxes = document.querySelectorAll('input[type=checkbox]')
   
   filterEvents(data, $checkBoxes, $searchInput);
 
@@ -72,7 +75,7 @@ const buildTemplateCheckBoxes = (categories) => {
 
   categories.forEach( (category) => {
       template += ` <div>
-                      <input type="checkbox" class="accent-color filter" id=${category} />
+                      <input type="checkbox" class="accent-color" value=${category.split(" ").join("")} id=${category} />
                       <label for=${category}>${category}</label>
                     </div>`
   });
@@ -118,7 +121,7 @@ const checkBoxHandler = (events, inputs) => {
 
     let filterData = [];
 
-    let isActiveFilter = inputs.length; // 0 is not active
+    let isActiveFilter = inputs.length;
 
     for(let input of inputs){
 
@@ -126,13 +129,13 @@ const checkBoxHandler = (events, inputs) => {
 
         isActiveFilter++
 
-        filterData = filterData.concat(events.filter(e => e.category === input.nextElementSibling.innerHTML));
+        filterData = filterData.concat(events.filter(e => e.category.split(" ").join("") === input.value));
 
       } else {
 
         isActiveFilter--
 
-        filterData = filterData.filter(e => e.category !== input.nextElementSibling.innerHTML);
+        filterData = filterData.filter(e => e.category.split(" ").join("")  !== input.value);
 
       }
 
