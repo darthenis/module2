@@ -7,9 +7,7 @@ let $checkBoxes;
 const $searchInput = document.getElementById("search");
 
 const loadData = async (url) => {
-  return fetch(url, {
-                method: "GET",
-              })
+  return fetch(url)
                 .then((res) => res.json())
                 .then((res) => {
                   return res.events;
@@ -44,7 +42,7 @@ const buildCard = (card) => {
 
 //LoadData
 
-loadData("./assets/data/data.json").then((data) => {
+loadData("https://mindhub-xj03.onrender.com/api/amazing").then((data) => {
 
   renderiseEventsCard(data, $containerCards);
 

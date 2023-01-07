@@ -8,9 +8,7 @@ const $searchInput = document.getElementById("search");
 
 
 const loadData = async (url) => {
-  return fetch(url, {
-    method: "GET",
-  })
+  return fetch(url)
     .then((res) => res.json())
     .then((res) => {
       return getUpcomingEvents(res.events, res.currentDate)
@@ -54,7 +52,7 @@ const buildCard = (card) => {
 </article>`;
 };
 
-loadData("./assets/data/data.json").then((data) => {
+loadData("https://mindhub-xj03.onrender.com/api/amazing").then((data) => {
 
   renderiseEventsCard(data, $containerCards);
 
