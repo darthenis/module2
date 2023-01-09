@@ -2,21 +2,21 @@
 const loadData = async (url) => {
 
     return fetch(url)
-            .then(res => res.json())
-            .then(res => res)
+        .then(res => res.json())
+        .then(res => res)
 
 }
 
 loadData("https://mindhub-xj03.onrender.com/api/amazing")
-.then(data => {
+    .then(data => {
 
-    fillTableStaticEvents(data.events, 'staticsEventsContainer')
+        fillTableStaticEvents(data.events, 'staticsEventsContainer')
 
-    fillCategoriesStaticTable(data.events, 'upcomingCategoriesContainer', false, data.currentDate)
+        fillCategoriesStaticTable(data.events, 'upcomingCategoriesContainer', false, data.currentDate)
 
-    fillCategoriesStaticTable(data.events, 'pastCategoriesContainer', true, data.currentDate)
+        fillCategoriesStaticTable(data.events, 'pastCategoriesContainer', true, data.currentDate)
 
-})
+    })
 
 //tableStatic
 
@@ -42,23 +42,21 @@ const getEventStatic = (events) => {
 
     return events.reduce((acc, event) => {
 
-        let key = event.assistance ? "assistance" : "estimate";
+        if ((event.estimate ?? event.assistance) * 100 / event.capacity > acc[0].value) {
 
-        if(event[key] * 100 / event.capacity > acc[0].value) {
-                
-                acc[0].name = event.name;
-                acc[0].value = parseFloat((event[key] * 100 / event.capacity).toFixed(2));
+            acc[0].name = event.name;
+            acc[0].value = parseFloat(((event.estimate ?? event.assistance) * 100 / event.capacity).toFixed(2));
         }
 
 
-        if(event[key]  * 100 / event.capacity < acc[1].value) {
-                
-                acc[1].name = event.name;
-                acc[1].value = parseFloat((event[key] * 100 / event.capacity).toFixed(2));
+        if ((event.estimate ?? event.assistance) * 100 / event.capacity < acc[1].value) {
+
+            acc[1].name = event.name;
+            acc[1].value = parseFloat(((event.estimate ?? event.assistance) * 100 / event.capacity).toFixed(2));
         }
 
 
-        if(event.capacity > acc[2].value) {
+        if (event.capacity > acc[2].value) {
 
             acc[2].name = event.name;
             acc[2].value = event.capacity;
@@ -67,9 +65,9 @@ const getEventStatic = (events) => {
 
         return acc;
 
-    }, [{name: "", value: -Infinity},
-        {name: "", value: Infinity},
-        {name: "", value: -Infinity}])
+    }, [{ name: "", value: -Infinity },
+    { name: "", value: Infinity },
+    { name: "", value: -Infinity }])
 
 }
 
@@ -79,23 +77,23 @@ const fillCategoriesStaticTable = (events, id, isBefore, currentDate) => {
 
     let filterEvents;
 
-    if(isBefore) filterEvents = events.filter(e => e.date < currentDate)
+    if (isBefore) filterEvents = events.filter(e => e.date < currentDate)
 
     else filterEvents = events.filter(e => e.date > currentDate)
 
-    const categories = getCategoriesFromEvents(filterEvents)
-  
+    const categories = getElementFromArray(filterEvents, "category")
+
     const filterCategoriesData = getCategoriesData(categories, filterEvents)
-    
+
     const container = document.getElementById(id);
 
     container.innerHTML += buildTablesCategories(filterCategoriesData)
 
 }
 
-const getCategoriesFromEvents = (events) => {
+const getElementFromArray = (events, element) => {
 
-    let filterCategories = events.map(e => e.category);
+    let filterCategories = events.map(e => e[element]);
 
     let noRepeat = new Set(filterCategories);
 
@@ -107,25 +105,25 @@ const getCategoriesData = (categories, events) => {
 
     return categories.map(category => {
 
-            let categoryEvents = events.filter(e => e.category === category);
-
-            return categoryEvents.reduce((acc, event, index) => {
+        return events.filter(e => e.category === category)
+            .reduce((acc, event, index, array) => {
 
                 acc.revenues += (event.estimate ?? event.assistance) * event.price;
 
                 acc.assistance += (event.estimate ?? event.assistance) * 100 / event.capacity;
 
-                if(index === categoryEvents.length - 1) {
-                    
-                    acc.assistance = parseFloat((acc.assistance / categoryEvents.length ).toFixed(2));
+                if (index === array.length - 1) {
+
+                    acc.assistance = parseFloat((acc.assistance / array.length).toFixed(2));
                 }
 
                 return acc;
 
-            }, {name : category, 
-                revenues: 0, 
-                assistance : 0, 
-                })
+            }, {
+                name: category,
+                revenues: 0,
+                assistance: 0,
+            })
 
     })
 
@@ -136,9 +134,9 @@ const buildTablesCategories = (categories) => {
 
     let template = "";
 
-    for(let category of categories){
+    for (let category of categories) {
 
-        template +=  `<tr><td>${category.name}</td>
+        template += `<tr><td>${category.name}</td>
                         <td>$${category.revenues}</td>
                         <td>${category.assistance}%</td>
                         </tr>`
