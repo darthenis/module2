@@ -103,42 +103,36 @@ const getCategoriesData = (events) => {
 
     return categories.map(c => {
 
-            let revenues = events.reduce((acc, event) => {
-                
-                let key = event.estimate ? "estimate" : "assistance"
+            let categoryEvents = events.filter(e => e.category === c);
 
-                if(event.category === c) {
+            let categoryData = categoryEvents.reduce((acc, event, index) => {
+
+                let key = event.estimate ? "estimate" : "assistance";
+
+                acc.revenues += event[key] * event.price;
+
+                acc.assistance += event[key];
+
+                acc.capacity += event.capacity;
+
+                if(index === categoryEvents.length - 1) {
                     
-                        acc += event[key] * event.price;
-                    
+                    acc.assistance = parseFloat((acc.assistance * 100 / acc.capacity).toFixed(2));
                 }
 
                 return acc;
-                
-                }, 0)
 
-            let assisCapacity = events.reduce((acc, event) => {
+            }, {name : c, 
+                revenues: 0, 
+                assistance : 0, 
+                capacity: 0 })
 
-                let key = event.estimate ? "estimate" : "assistance";
-                
-                if(event.category === c) {
-                        
-                    acc.assistance += event[key];
+            delete categoryData.capacity;
 
-                    acc.capacity += event.capacity;
-                     
-                }
- 
-                    return acc;
-                 
-                 }, {assistance : 0, capacity: 0})
-
-
-            let assistance = parseFloat((assisCapacity.assistance * 100 / assisCapacity.capacity).toFixed(2));
-
-            return { name : c, revenues: revenues, assistance : assistance}
+            return categoryData;
 
     })
+
 
 }
 
@@ -158,3 +152,34 @@ const buildTablesCategories = (categories) => {
     return template;
 
 }
+
+
+/* 
+
+
+            let revenues = categoryEvents.reduce((acc, event) => {
+                
+                let key = event.estimate ? "estimate" : "assistance"
+
+                acc += event[key] * event.price;
+
+                return acc;
+                
+                }, 0)
+
+            let assisCapacity = categoryEvents.reduce((acc, event) => {
+
+                let key = event.estimate ? "estimate" : "assistance";
+                        
+                acc.assistance += event[key];
+
+                acc.capacity += event.capacity;
+                     
+                return acc;
+                 
+                 }, {assistance : 0, capacity: 0})
+
+
+            let assistance = parseFloat((assisCapacity.assistance * 100 / assisCapacity.capacity).toFixed(2));
+
+            return { name : c, revenues: revenues, assistance : assistance} */
