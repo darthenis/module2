@@ -81,9 +81,7 @@ const fillCategoriesStaticTable = (events, id, isBefore, currentDate) => {
 
     else filterEvents = events.filter(e => e.date > currentDate)
 
-    const categories = getElementFromArray(filterEvents, "category")
-
-    const filterCategoriesData = getCategoriesData(categories, filterEvents)
+    const filterCategoriesData = getCategoriesData(filterEvents)
 
     const container = document.getElementById(id);
 
@@ -91,17 +89,61 @@ const fillCategoriesStaticTable = (events, id, isBefore, currentDate) => {
 
 }
 
-const getElementFromArray = (events, element) => {
+const getCategoriesData = (events) => {
 
-    let filterCategories = events.map(e => e[element]);
+    return events.reduce((acc, event, index, array) => {
 
-    let noRepeat = new Set(filterCategories);
+            let accId = acc.indexOf(e => e.name === event.category); 
 
-    return Array.from(noRepeat)
+            if(accId >= 0){
+
+                acc[accId].revenues += (event.estimate ?? event.assistance) * event.price;
+
+                acc[accId].assistance += (event.estimate ?? event.assistance) * 100 / event.capacity;
+
+            } else {
+
+                const element = {
+                    name : event.category,
+                    revenues: (event.estimate ?? event.assistance) * event.price,
+                    assistance : parseFloat(((event.estimate ?? event.assistance) * 100 / event.capacity).toFixed(2))
+                }
+
+                acc.push(element);
+
+            }
+
+            if (index === array.length - 1) {
+
+                acc.assistance = parseFloat((acc.assistance / array.length).toFixed(2));
+            }
+
+            return acc;
+
+            
+    }, [])
 
 }
 
-const getCategoriesData = (categories, events) => {
+const buildTablesCategories = (categories) => {
+
+    let template = "";
+
+    for (let category of categories) {
+
+        template += `<tr><td>${category.name}</td>
+                        <td>$${category.revenues}</td>
+                        <td>${category.assistance}%</td>
+                        </tr>`
+
+    }
+
+    return template;
+
+}
+
+
+/*
 
     return categories.map(category => {
 
@@ -126,23 +168,4 @@ const getCategoriesData = (categories, events) => {
             })
 
     })
-
-
-}
-
-const buildTablesCategories = (categories) => {
-
-    let template = "";
-
-    for (let category of categories) {
-
-        template += `<tr><td>${category.name}</td>
-                        <td>$${category.revenues}</td>
-                        <td>${category.assistance}%</td>
-                        </tr>`
-
-    }
-
-    return template;
-
-}
+*/
