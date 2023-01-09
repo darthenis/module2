@@ -141,31 +141,3 @@ const buildTablesCategories = (categories) => {
     return template;
 
 }
-
-
-/*
-
-    return categories.map(category => {
-
-        return events.filter(e => e.category === category)
-            .reduce((acc, event, index, array) => {
-
-                acc.revenues += (event.estimate ?? event.assistance) * event.price;
-
-                acc.assistance += (event.estimate ?? event.assistance) * 100 / event.capacity;
-
-                if (index === array.length - 1) {
-
-                    acc.assistance = parseFloat((acc.assistance / array.length).toFixed(2));
-                }
-
-                return acc;
-
-            }, {
-                name: category,
-                revenues: 0,
-                assistance: 0,
-            })
-
-    })
-*/
