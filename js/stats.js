@@ -1,5 +1,4 @@
 
-
 const loadData = async (url) => {
 
     return fetch(url)
@@ -7,7 +6,6 @@ const loadData = async (url) => {
             .then(res => res)
 
 }
-
 
 loadData("https://mindhub-xj03.onrender.com/api/amazing")
 .then(data => {
@@ -79,13 +77,15 @@ const getEventStatic = (events) => {
 
 const fillCategoriesStaticTable = (events, id, isBefore, currentDate) => {
 
-    let filterTimeEvents;
+    let filterEvents;
 
-    if(isBefore) filterTimeEvents = events.filter(e => e.date < currentDate)
+    if(isBefore) filterEvents = events.filter(e => e.date < currentDate)
 
-    else filterTimeEvents = events.filter(e => e.date > currentDate)
+    else filterEvents = events.filter(e => e.date > currentDate)
+
+    const categories = getCategoriesFromEvents(filterEvents)
   
-    const filterCategoriesData = getCategoriesData(filterTimeEvents)
+    const filterCategoriesData = getCategoriesData(categories, filterEvents)
     
     const container = document.getElementById(id);
 
@@ -93,33 +93,31 @@ const fillCategoriesStaticTable = (events, id, isBefore, currentDate) => {
 
 }
 
-const getCategoriesData = (events) => {
+const getCategoriesFromEvents = (events) => {
 
     let filterCategories = events.map(e => e.category);
 
     let noRepeat = new Set(filterCategories);
 
-    let categories = Array.from(noRepeat);
+    return Array.from(noRepeat)
+
+}
+
+const getCategoriesData = (categories, events) => {
 
     return categories.map(category => {
 
             let categoryEvents = events.filter(e => e.category === category);
 
-            let capacity = 0;
-
             return categoryEvents.reduce((acc, event, index) => {
 
-                let key = event.estimate ? "estimate" : "assistance";
+                acc.revenues += (event.estimate ?? event.assistance) * event.price;
 
-                acc.revenues += event[key] * event.price;
-
-                acc.assistance += event[key];
-
-                capacity += event.capacity;
+                acc.assistance += (event.estimate ?? event.assistance) * 100 / event.capacity;
 
                 if(index === categoryEvents.length - 1) {
                     
-                    acc.assistance = parseFloat((acc.assistance * 100 / capacity).toFixed(2));
+                    acc.assistance = parseFloat((acc.assistance / categoryEvents.length ).toFixed(2));
                 }
 
                 return acc;
