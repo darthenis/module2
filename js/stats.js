@@ -101,9 +101,9 @@ const getCategoriesData = (events) => {
 
     let categories = Array.from(noRepeat);
 
-    return categories.map(c => {
+    return categories.map(category => {
 
-            let categoryEvents = events.filter(e => e.category === c);
+            let categoryEvents = events.filter(e => e.category === category);
 
             let capacity = 0;
 
@@ -124,7 +124,7 @@ const getCategoriesData = (events) => {
 
                 return acc;
 
-            }, {name : c, 
+            }, {name : category, 
                 revenues: 0, 
                 assistance : 0, 
                 })
