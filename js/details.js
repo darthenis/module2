@@ -46,7 +46,7 @@ const buildCard = (event) => {
                     <li><span>Description:</span> ${event.description}</li>
                     <li><span>Category:</span> ${event.category}</li>
                     <li><span>Place:</span> ${event.place}</li>
-                    <li><span>Capacity:</span> ${event.capacity}0</li>
+                    <li><span>Capacity:</span> ${event.capacity}</li>
                     ${event.estimate ? estimateOptional : ''}
                     <li><span>Price:</span> $${event.price}</li>
                 </ul>
