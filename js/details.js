@@ -36,8 +36,6 @@ const getParamUrl = (param) => {
 
 const buildCard = (event) => {
 
-    let estimateOptional = `<li><span>Estimate:</span>${event.estimate}</li>`
-
     return  `<img src=${event.image} alt="scale">
                 <div>
                 <h1 class="text-center">${event.name}</h1>
@@ -47,7 +45,7 @@ const buildCard = (event) => {
                     <li><span>Category:</span> ${event.category}</li>
                     <li><span>Place:</span> ${event.place}</li>
                     <li><span>Capacity:</span> ${event.capacity}</li>
-                    ${event.estimate ? estimateOptional : ''}
+                    <li><span>${event.assistance ? "Assistance" : "Estimate"}: </span>${event.assistance ? event.assistance : event.estimate}</li>
                     <li><span>Price:</span> $${event.price}</li>
                 </ul>
                 </div>`
