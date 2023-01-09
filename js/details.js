@@ -10,7 +10,7 @@ const loadData = async (url) => {
                   });
 };
 
-loadData("./assets/data/data.json").then(events => {
+loadData("https://mindhub-xj03.onrender.com/api/amazing").then(events => {
 
     renderDetailCard(events, $containerCard);
   
