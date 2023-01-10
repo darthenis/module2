@@ -101,12 +101,15 @@ const getCategoriesData = (events) => {
 
                 acc[accId].assistance += (event.estimate ?? event.assistance) * 100 / event.capacity;
 
+                acc[accId].count += 1;
+
             } else {
 
                 const element = {
                     name : event.category,
                     revenues: (event.estimate ?? event.assistance) * event.price,
-                    assistance : parseFloat(((event.estimate ?? event.assistance) * 100 / event.capacity).toFixed(2))
+                    assistance : ((event.estimate ?? event.assistance) * 100) / event.capacity,
+                    count: 1
                 }
 
                 acc.push(element);
@@ -115,7 +118,13 @@ const getCategoriesData = (events) => {
 
             if (index === array.length - 1) {
 
-                acc.assistance = parseFloat((acc.assistance / array.length).toFixed(2));
+                for(let ele of acc){
+
+                    ele.assistance = parseFloat((ele.assistance / ele.count).toFixed(2));
+
+                    delete ele.count;
+                }
+
             }
 
             return acc;
