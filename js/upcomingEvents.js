@@ -31,7 +31,7 @@ const renderiseEventsCard = (events, where) => {
 
   where.innerHTML = "";
 
-  if(!events.length) return where.innerHTML= "<p class='text-light text-center fs-3 text-notfound'>No hay coincidencias que se correspondan con la busqueda</p>"
+  if(!events.length) return where.innerHTML= "<p class='text-light text-center fs-3 text-notfound'>There are no matches that correspond to the search</p>"
 
   for (let event of events) {
     where.innerHTML += buildCard(event);
