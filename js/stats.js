@@ -42,14 +42,14 @@ const getEventStatic = (events) => {
 
     return events.reduce((acc, event) => {
 
-        if ((event.estimate ?? event.assistance) * 100 / event.capacity > acc[0].value) {
+        if (event.assistance * 100 / event.capacity > acc[0].value) {
 
             acc[0].name = event.name;
             acc[0].value = parseFloat(((event.estimate ?? event.assistance) * 100 / event.capacity).toFixed(2));
         }
 
 
-        if ((event.estimate ?? event.assistance) * 100 / event.capacity < acc[1].value) {
+        if (event.assistance * 100 / event.capacity < acc[1].value) {
 
             acc[1].name = event.name;
             acc[1].value = parseFloat(((event.estimate ?? event.assistance) * 100 / event.capacity).toFixed(2));
@@ -66,8 +66,8 @@ const getEventStatic = (events) => {
         return acc;
 
     }, [{ name: "", value: -Infinity },
-    { name: "", value: Infinity },
-    { name: "", value: -Infinity }])
+        { name: "", value: Infinity },
+        { name: "", value: -Infinity }])
 
 }
 
