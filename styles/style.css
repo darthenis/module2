@@ -186,6 +186,12 @@ article{
 
 }
 
+.text-notfound{
+
+    grid-column: 1/-1;
+
+}
+
 .btn-viewMore{
     display: flex;
     align-items: center;

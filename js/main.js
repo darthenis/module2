@@ -18,6 +18,8 @@ const renderiseEventsCard = (events, container) => {
 
   container.innerHTML  = "";
 
+  if(!events.length) return container.innerHTML="<p class='text-light text-center fs-3 text-notfound'>No hay coincidencias que se correspondan con la busqueda</p>"
+
   for (let event of events) {
     container.innerHTML += buildCard(event);
   }
