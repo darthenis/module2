@@ -59,7 +59,7 @@ const hiddenElements = (elements) => {
   else nodeElement.style.visibility = "hidden";
   }
   
-  }
+}
 
 const loadData = async (url) => {
   return fetch(url)
