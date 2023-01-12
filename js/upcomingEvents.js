@@ -7,6 +7,61 @@ let $checkBoxes;
 const $searchInput = document.getElementById("search");
 
 
+const templateLoading = ` <div class="lds-roller">
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                            </div>
+                        `
+
+const isLoading = (id, idContainer, idsTohide) => {
+
+  hiddenElements(idsTohide);
+
+  const loading = document.getElementById(id);
+
+  if(loading) return loading.remove();
+
+  const container = document.getElementById(idContainer);
+
+  const newNode = document.createElement('div');
+
+  newNode.classList.add("d-flex")
+
+  newNode.classList.add("justify-content-center")
+
+  newNode.classList.add("align-items-center")
+
+  newNode.style.height = "50vh"
+
+  newNode.id = "loading"
+
+  newNode.innerHTML += templateLoading;
+
+  container.insertBefore(newNode, container.firstChild)
+
+}
+
+
+const hiddenElements = (elements) => {
+
+  for(let element of elements){
+  
+  let nodeElement = document.getElementById(element);
+  
+  let display = nodeElement.style.visibility;
+  
+  if(display === "hidden") nodeElement.style.visibility = "visible"
+  else nodeElement.style.visibility = "hidden";
+  }
+  
+}
+
 const loadData = async (url) => {
   return fetch(url)
     .then((res) => res.json())
@@ -54,7 +109,12 @@ const buildCard = (card) => {
 </article>`;
 };
 
+
+isLoading("loading", "main", ['search'])
+
 loadData("https://mindhub-xj03.onrender.com/api/amazing").then((data) => {
+
+  isLoading("loading", "main", ['search'])
 
   renderiseEventsCard(data, $containerCards);
 
