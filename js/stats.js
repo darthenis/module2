@@ -56,12 +56,24 @@ else nodeElement.style.visibility = "hidden";
 
 }
 
+const handlerErrorLoadData = (elementsToHide, containerId) => {
+
+    hiddenElements(elementsToHide);
+  
+    const container = document.getElementById(containerId);
+  
+    container.innerHTML = ` <p class="text-center fs-3 text-light mt-4">
+                              Oops, something went wrong. Please try more later.
+                            </p>`
+  
+  }
 
 const loadData = async (url) => {
 
     return fetch(url)
         .then(res => res.json())
         .then(res => res)
+        .catch(err => {throw err})
 
 }
 
@@ -78,6 +90,11 @@ loadData("https://mindhub-xj03.onrender.com/api/amazing")
 
         fillCategoriesStaticTable(data.events, 'pastCategoriesContainer', true, data.currentDate)
 
+    })
+    .catch(err => {
+        isLoading("loading", "main", ['parentTables']);
+        console.log(err);
+        handlerErrorLoadData(["parentTables"], "main")
     })
 
 //tableStatic

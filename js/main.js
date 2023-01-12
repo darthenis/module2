@@ -61,12 +61,29 @@ const hiddenElements = (elements) => {
   
 }
 
+const handlerErrorLoadData = (elementsToHide, containerId) => {
+
+  hiddenElements(elementsToHide);
+
+  const container = document.getElementById(containerId);
+
+  container.innerHTML = ` <p class="text-center fs-3 text-light mt-4">
+                            Oops, something went wrong. Please try more later.
+                          </p>`
+
+}
+
 const loadData = async (url) => {
   return fetch(url)
                 .then((res) => res.json())
                 .then((res) => {
                   return res.events;
-                });
+                })
+                .catch(err => {
+
+                  throw err;
+
+                })
 };
 
 const renderiseEventsCard = (events, container) => {
@@ -112,6 +129,15 @@ loadData("https://mindhub-xj03.onrender.com/api/amazing").then((data) => {
   $checkBoxes = document.querySelectorAll('input[type=checkbox]')
   
   filterEvents(data, $checkBoxes, $searchInput);
+
+})
+.catch(err => {
+
+  isLoading("loading", "main", ['search'])
+
+  console.log(err)
+
+  handlerErrorLoadData(['search'], "main")
 
 })
 

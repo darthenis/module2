@@ -62,12 +62,25 @@ const hiddenElements = (elements) => {
   
 }
 
+const handlerErrorLoadData = (elementsToHide, containerId) => {
+
+  hiddenElements(elementsToHide);
+
+  const container = document.getElementById(containerId);
+
+  container.innerHTML = ` <p class="text-center fs-3 text-light mt-4">
+                            Oops, something went wrong. Please try more later.
+                          </p>`
+
+}
+
 const loadData = async (url) => {
   return fetch(url)
     .then((res) => res.json())
     .then((res) => {
       return getUpcomingEvents(res.events, res.currentDate)
-    });
+    })
+    .catch(err => {throw err});
 };
 
 const getUpcomingEvents = (events, currentDate) => {
@@ -124,7 +137,16 @@ loadData("https://mindhub-xj03.onrender.com/api/amazing").then((data) => {
 
   filterEvents(data, $checkBoxes, $searchInput)
 
-});
+})
+.catch(err => {
+
+  isLoading("loading", "main", ['search'])
+
+  console.log(err);
+
+  handlerErrorLoadData(["search"], "main")
+
+})
 
 
 /*generate checkBoxes input from data's categories */
